@@ -56,7 +56,7 @@
                                             <constraint firstItem="PYJ-HB-3Zl" firstAttribute="centerX" secondItem="63M-1d-N9q" secondAttribute="centerX" id="pV5-ax-wII"/>
                                         </constraints>
                                     </view>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="d6D-9s-cXE">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="Cell" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="d6D-9s-cXE">
                                         <rect key="frame" x="0.0" y="210" width="393" height="440"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="JbK-Wu-II7">
@@ -83,6 +83,9 @@
                                                 <rect key="frame" x="288" y="8" width="75" height="34.333333333333336"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="tinted" title="Button"/>
+                                                <connections>
+                                                    <action selector="addButtonTapped:" destination="hyh-3E-CB0" eventType="touchUpInside" id="hfr-Xm-Z0l"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -111,7 +114,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="kUJ-Qj-JET"/>
                     <connections>
-                        <outlet property="CollectionView" destination="d6D-9s-cXE" id="oJg-NP-BmG"/>
+                        <outlet property="collectionView" destination="d6D-9s-cXE" id="UzP-3w-00e"/>
                         <outlet property="up_label" destination="PYJ-HB-3Zl" id="JvQ-XT-nhs"/>
                     </connections>
                 </viewController>
