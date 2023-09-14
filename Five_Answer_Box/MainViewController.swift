@@ -97,6 +97,9 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         label.font = UIFont.boldSystemFont(ofSize: 20.0) // 폰트 크기 20으로 설정하고 볼드 처리
         cell.contentView.addSubview(label)
         
+        // 길게 눌렀을 때 셀을 삭제하기 위한 제스처 등록
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+        cell.addGestureRecognizer(longPressGestureRecognizer)
         return cell
     }
     
@@ -106,8 +109,36 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
         let height: CGFloat = 60.0 // 고정된 세로 크기
         return CGSize(width: width, height: height)
     }
-    
- 
-   
+    @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer) {
+        if gestureRecognizer.state == .began {
+            // 길게 누른 셀의 인덱스 가져오기
+            if let indexPath = collectionView.indexPathForItem(at: gestureRecognizer.location(in: collectionView)) {
+                // 사용자에게 삭제 확인 대화 상자 표시
+                let alertController = UIAlertController(title: "삭제 확인", message: "정말로 이 항목을 삭제하시겠습니까?", preferredStyle: .alert)
+                
+                // 취소 액션 추가
+                let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+                alertController.addAction(cancelAction)
+                
+                // 삭제 액션 추가
+                let deleteAction = UIAlertAction(title: "삭제", style: .destructive) { (action) in
+                    // 데이터 소스에서 해당 항목 삭제
+                    self.items.remove(at: indexPath.item)
+                    
+                    // 셀 삭제
+                    self.collectionView.deleteItems(at: [indexPath])
+                }
+                alertController.addAction(deleteAction)
+                
+                // 모달 창 표시
+                present(alertController, animated: true, completion: nil)
+            }
+        }
+        
+        
+        
+        
+        
+    }
 
 }
